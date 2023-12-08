@@ -34,7 +34,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.chunk.WorldChunk;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
@@ -168,6 +167,35 @@ public class TradeShopBlockEntity extends BlockEntity implements RemappedInvento
                     elementHolder.addElement(this.textDisplay);
                 }
 
+            } else if (this.hologramMode == HologramMode.PRICE) {
+                if ((this.world.getTime() % 32) != 0) {
+                    return;
+                }
+
+                var hasStock = this.stockHandler.getMaxAmount(null) != 0;
+
+                this.itemDisplay.setItem(ItemStack.EMPTY);
+
+                int lines = 2;
+                var text = Text.empty()
+                        .append(TextUtil.text("price",
+                                this.priceHandler.getText().copy().setStyle(Style.EMPTY.withFormatting(Formatting.WHITE).withBold(false))
+                        ).setStyle(Style.EMPTY.withFormatting(Formatting.DARK_GREEN).withBold(true)));
+
+                if (!hasStock) {
+                    lines++;
+                    text.append("\n").append((this.getContainer() != EmptyInventory.INSTANCE ? TextUtil.gui("out_of_stock") : TextUtil.text("stock_missing")).formatted(Formatting.RED));
+                }
+                this.textDisplay.setText(text);
+                this.itemDisplay.setTranslation(new Vector3f(0, 0.25f + 0.28f * lines, 0));
+
+                if (this.itemDisplay.getHolder() != elementHolder) {
+                    elementHolder.addElement(this.itemDisplay);
+                }
+
+                if (this.textDisplay.getHolder() != elementHolder) {
+                    elementHolder.addElement(this.textDisplay);
+                }
             } else {
                 if ((this.world.getTime() % 12) != 0) {
                     return;
@@ -294,6 +322,7 @@ public class TradeShopBlockEntity extends BlockEntity implements RemappedInvento
     public enum HologramMode {
         FULL,
         ICON,
+        PRICE,
         DISABLED
     }
 
