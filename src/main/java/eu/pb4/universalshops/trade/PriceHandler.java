@@ -49,8 +49,10 @@ public abstract class PriceHandler extends GenericHandler {
     public abstract Result payFor(ServerPlayerEntity player, boolean canTake);
 
     public final NbtCompound writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup lookup) {
-        nbt.putString("PriceType", this.definition.type);
-        nbt.put("PriceValue", writeValueNbt(lookup));
+        if (!this.definition.type.isEmpty()){
+            nbt.putString("PriceType", this.definition.type);
+            nbt.put("PriceValue", writeValueNbt(lookup));
+        }
         return nbt;
     }
 
@@ -285,10 +287,13 @@ public abstract class PriceHandler extends GenericHandler {
 
         @Override
         protected NbtElement writeValueNbt(RegistryWrapper.WrapperLookup lookup) {
-            var nbt = new NbtCompound();
-            nbt.put("Value", this.value.encode(lookup));
-            nbt.put("CurrencyContainer", this.currencyInventory.toNbtList(lookup));
-            return nbt;
+            if (!this.value.isEmpty()){
+                var nbt = new NbtCompound();
+                nbt.put("Value", this.value.encode(lookup));
+                nbt.put("CurrencyContainer", this.currencyInventory.toNbtList(lookup));
+                return nbt;
+            }
+            return new NbtCompound();
         }
 
         @Override
