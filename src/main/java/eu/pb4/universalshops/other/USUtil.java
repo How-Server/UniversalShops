@@ -83,7 +83,7 @@ public class USUtil {
     }
 
     public static Text asText(ItemStack value) {
-        return value.getCount() == 1 ? value.getName() : Text.empty().append(value.getName()).append(" × " + value.getCount());
+        return value.getCount() == 1 ? Text.empty().append(value.getName()) : Text.empty().append(value.getName()).append(" × " + value.getCount());
     }
 
     public static SimpleInventory copyInventory(Inventory input) {
