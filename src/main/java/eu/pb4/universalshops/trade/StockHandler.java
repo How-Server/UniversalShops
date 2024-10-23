@@ -36,10 +36,8 @@ public abstract class StockHandler extends GenericHandler {
     public abstract void openTradeGui(ServerPlayerEntity player);
     
     public final NbtCompound writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup lookup) {
-        if (!this.definition.type.isEmpty()){
-            nbt.putString("StockType", this.definition.type);
-            nbt.put("StockValue", this.writeValueNbt(lookup));
-        }
+        nbt.putString("StockType", this.definition.type);
+        nbt.put("StockValue", this.writeValueNbt(lookup));
         return nbt;
     }
     
@@ -183,10 +181,7 @@ public abstract class StockHandler extends GenericHandler {
 
         @Override
         protected NbtElement writeValueNbt(RegistryWrapper.WrapperLookup lookup) {
-            if (!this.value.isEmpty()) {
-                return this.value.encode(lookup);
-            }
-            return new NbtCompound();
+            return this.value.toNbtAllowEmpty(lookup);
         }
 
         @Override
