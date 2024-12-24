@@ -1,17 +1,14 @@
 {
   "text.universal_shops.about.version": "版本: %s",
   "text.universal_shops.about.contributors": "貢獻者",
-
   "gui.universal_shops.stock_left": "剩餘庫存: %s",
   "gui.universal_shops.max_stock_left": "你可以買: %s",
-
   "gui.universal_shops.shop.price_info": "價格: %s",
   "gui.universal_shops.shop.stock_info": "商品: %s",
   "gui.universal_shops.shop.currency_storage": "販售收入",
   "gui.universal_shops.shop.settings": "商店設定",
   "gui.universal_shops.shop.title": "%s的商店",
   "gui.universal_shops.shop.title.admin": "官方商店",
-
   "gui.universal_shops.click_to_buy": "點擊物品購買",
   "gui.universal_shops.out_of_stock": "沒貨了!",
   "gui.universal_shops.setup.cant_change_pricehandler.1": "無法更改此設定!",
@@ -37,7 +34,6 @@
   "gui.universal_shops.virtual_balance.settings.title": "支付設定",
   "gui.universal_shops.virtual_balance.selected_account": "選擇帳號: %s",
   "gui.universal_shops.virtual_balance.balance": "總收入: %s",
-
   "text.universal_shops.prefix": "商店",
   "text.universal_shops.not_enough_shop_storage_space": "此商店空間不足!",
   "text.universal_shops.not_enough_currency": "沒有足夠的物品交易!",
@@ -54,21 +50,16 @@
   "text.universal_shops.virtual_money.cant_store": "Can't store balance!",
   "text.universal_shops.virtual_money.not_enough_money": "Transaction failed! %s",
   "text.universal_shops.virtual_money.no_account": "You don't have required account!",
-
   "pricehandler.universal_shops.free": "免費",
   "pricehandler.universal_shops.items": "物品",
   "pricehandler.universal_shops.virtual_balance": "Balance",
-
   "stockhandler.universal_shops.single_item": "對應物品",
   "stockhandler.universal_shops.selected_item": "任意倉庫內物品",
-
   "hologram_type.universal_shops.full": "完整顯示",
   "hologram_type.universal_shops.icon": "只顯示圖示",
   "hologram_type.universal_shops.price": "只顯示價格",
   "hologram_type.universal_shops.disabled": "取消顯示",
-
   "block.universal_shops.trade_block": "商店方塊",
   "block.universal_shops.admin_trade_block": "管理員商店方塊",
-
   "gui.universal_shops.modifying_item.change_item.select_item_group.title": "選擇物品組合"
 }
