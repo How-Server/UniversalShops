@@ -54,11 +54,11 @@ public class TradeShopBlockEntity extends BlockEntity implements RemappedInvento
         super(USRegistry.BLOCK_ENTITY_TYPE, pos, state);
         this.containerPos = pos.offset(state.get(TradeShopBlock.ATTACHED));
         this.textDisplay.setBillboardMode(DisplayEntity.BillboardMode.CENTER);
-        this.textDisplay.setViewRange(0.5f);
+        this.textDisplay.setViewRange(0.125f);
         this.itemDisplay.setBillboardMode(DisplayEntity.BillboardMode.CENTER);
         this.itemDisplay.setModelTransformation(ModelTransformationMode.GUI);
         this.itemDisplay.setLeftRotation(new Quaternionf().rotateY(MathHelper.PI));
-        this.itemDisplay.setViewRange(0.5f);
+        this.itemDisplay.setViewRange(0.125f);
         this.itemDisplay.setScale(new Vector3f(0.6f, 0.6f, 0.01f));
     }
 
