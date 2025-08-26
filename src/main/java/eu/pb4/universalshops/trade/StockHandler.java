@@ -8,12 +8,11 @@ import eu.pb4.universalshops.gui.setup.ItemModificatorGui;
 import eu.pb4.universalshops.other.USUtil;
 import eu.pb4.universalshops.other.TextUtil;
 import eu.pb4.universalshops.registry.TradeShopBlockEntity;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
@@ -22,6 +21,7 @@ import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.List;
 import java.util.function.Predicate;
 
 public abstract class StockHandler extends GenericHandler {
@@ -194,6 +194,17 @@ public abstract class StockHandler extends GenericHandler {
 
         @Override
         public Text getStockName() {
+            if (this.value.getItem().equals(Items.ENCHANTED_BOOK)) {
+                var storedEnchantments = this.value.get(DataComponentTypes.STORED_ENCHANTMENTS);
+                if (storedEnchantments != null) {
+                    var enchantments = storedEnchantments.getEnchantments();
+                    if (!enchantments.isEmpty()) {
+                        var firstEntry = enchantments.iterator().next();
+                        int level = storedEnchantments.getLevel(firstEntry);
+                        return Enchantment.getName(firstEntry, level);
+                    }
+                }
+            }
             return USUtil.asText(this.value);
         }
 
