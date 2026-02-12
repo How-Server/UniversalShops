@@ -8,6 +8,8 @@ import eu.pb4.universalshops.gui.setup.ItemModificatorGui;
 import eu.pb4.universalshops.other.USUtil;
 import eu.pb4.universalshops.other.TextUtil;
 import eu.pb4.universalshops.registry.TradeShopBlockEntity;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.enchantment.Enchantment;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -193,13 +195,13 @@ public abstract class StockHandler extends GenericHandler {
         @Override
         public Component getStockName() {
             if (this.value.getItem().equals(Items.ENCHANTED_BOOK)) {
-                var storedEnchantments = this.value.get(DataComponentTypes.STORED_ENCHANTMENTS);
+                var storedEnchantments = this.value.get(DataComponents.STORED_ENCHANTMENTS);
                 if (storedEnchantments != null) {
-                    var enchantments = storedEnchantments.getEnchantments();
+                    var enchantments = storedEnchantments.keySet();
                     if (!enchantments.isEmpty()) {
                         var firstEntry = enchantments.iterator().next();
                         int level = storedEnchantments.getLevel(firstEntry);
-                        return Enchantment.getName(firstEntry, level);
+                        return Enchantment.getFullname(firstEntry, level);
                     }
                 }
             }

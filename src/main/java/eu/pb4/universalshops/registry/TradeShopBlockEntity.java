@@ -172,7 +172,7 @@ public class TradeShopBlockEntity extends BlockEntity implements RemappedInvento
                 }
 
             } else if (this.hologramMode == HologramMode.PRICE) {
-                if ((this.world.getTime() % 32) != 0) {
+                if ((this.level.getGameTime() % 32) != 0) {
                     return;
                 }
 
@@ -181,14 +181,14 @@ public class TradeShopBlockEntity extends BlockEntity implements RemappedInvento
                 this.itemDisplay.setItem(ItemStack.EMPTY);
 
                 int lines = 2;
-                var text = Text.empty()
+                var text = Component.empty()
                         .append(TextUtil.text("price",
-                                this.priceHandler.getText().copy().setStyle(Style.EMPTY.withFormatting(Formatting.WHITE).withBold(false))
-                        ).setStyle(Style.EMPTY.withFormatting(Formatting.DARK_GREEN).withBold(true)));
+                                this.priceHandler.getText().copy().setStyle(Style.EMPTY.applyFormat(ChatFormatting.WHITE).withBold(false))
+                        ).setStyle(Style.EMPTY.applyFormat(ChatFormatting.DARK_GREEN).withBold(true)));
 
                 if (!hasStock) {
                     lines++;
-                    text.append("\n").append((this.getContainer() != EmptyInventory.INSTANCE ? TextUtil.gui("out_of_stock") : TextUtil.text("stock_missing")).formatted(Formatting.RED));
+                    text.append("\n").append((this.getContainer() != EmptyInventory.INSTANCE ? TextUtil.gui("out_of_stock") : TextUtil.text("stock_missing")).withStyle(ChatFormatting.RED));
                 }
                 this.textDisplay.setText(text);
                 this.itemDisplay.setTranslation(new Vector3f(0, 0.25f + 0.28f * lines, 0));
